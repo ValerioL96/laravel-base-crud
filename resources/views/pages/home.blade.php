@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('page-title','homepage')
+@section('page-title','Laravel Base CRUD - Animal Reserve')
 
 @section('main-content')
 <section class="container">
@@ -19,24 +19,16 @@
                             </h5>
                         </div>
                         <div class="card-body">
-                            <img src="{{$animal->url_img}}" class="card-img-top" alt="img_animal">
-                            <p class="card-text">
-                                Specie: {{$animal->specie}}
-                            </p>
-                            <p class="card-text">
-                                Età: {{$animal->eta}}
-                            </p>
-                            <p class="card-text">
-                                Peso: {{$animal->peso}}
-                            </p>
-                            <p class="card-text">
-                                Sesso: {{$animal->sesso}}
-                            </p>
-                            <p class="card-text">
-                                Note: {{$animal->note}}
-                            </p>
+                            <img src="{{$animal->url_img}}" class="card-img-top mb-2" alt="img_animal">
+
+                        </div>
+                        <div class="card-footer card-link d-flex justify-content-center">
+
+                            <a href="{{route('pages.show', ['animal' => $animal->id])}}" class="btn btn-primary" >Animal Detail</a>
                         </div>
                     </div>
                 </article>
         @endforeach
+    </div>
+</section>
 @endsection
