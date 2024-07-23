@@ -18,13 +18,12 @@ class AnimalSeeder extends Seeder
             $animal = new Animal();
             $animal->nome = $faker->name();
             $animal->specie = $faker->name();
-            $animal->eta = $faker->numberBetween(1, 10);
+            $animal->eta = $faker->numberBetween(1, 15);
             $animal->peso = $faker->randomFloat(2, 1, 10);
-            $animal->sesso = $faker->word(1);
+            $animal->sesso = $faker->numberBetween(0, 1);
             $animal->url_img = $faker->imageUrl(500, 300, 'animals', true);
             $animal->note = $faker->realText(350);
             $animal->save();
         }
     }
-
 }
