@@ -34,7 +34,8 @@
                 </div>
                 <div class="card-footer card-link d-flex justify-content-center">
 
-                    <a href="{{route('pages.home')}}" class="btn btn-danger">Back to do animal list</a>
+                    <a href="{{route('pages.home')}}" class="btn btn-secondar">Back to do animal list</a>
+                    <a href="{{route('pages.edit', ['animal' => $animal->id])}}" class="btn btn-warnig">Edit animal list</a>
                 </div>
             </div>
         </article>

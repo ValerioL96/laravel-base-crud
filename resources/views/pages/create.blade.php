@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('page-title')
-
+Added_new_animal
 @endsection
 
 @section('main-content')
