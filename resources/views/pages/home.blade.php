@@ -4,12 +4,7 @@
 
 @section('main-content')
 <section class="container">
-    <div class="row">
-        <div class="col-12 text-center">
-            <h1>
-                Animali della Riserva
-            </h1>
-        </div>
+    <div class="row my-5">
         @foreach ($animals as $animal)
                 <article class="col-3 mb-3">
                     <div class="card text-bg-warning mb-3" style="max-width: 18rem;">
