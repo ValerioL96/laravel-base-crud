@@ -5,11 +5,20 @@ Added_new_animal
 @endsection
 
 @section('main-content')
-<div class="bg-dark m-5 rounded-pill opacity-75">
+<div class="bg-dark m-5 rounded-5 opacity-75">
     <form action="{{route('pages.store')}}" method="POST" >
         @csrf
         <div class="row justify-content-center">
-            <div class="mb-3 col-4 ">
+            @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+            <div class="mb-3 col-3 ">
                 <label for="nome">Nome</label>
                 <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="Nome animale" id="nome" name="nome">
 
@@ -33,7 +42,7 @@ Added_new_animal
 
 
             </div>
-            <div class="d-flex justify-content-center ">
+            <div class="d-flex justify-content-center mb-3 ">
 
                 <input class="btn btn-primary mx-2" type="submit" value="crea un nuovo animale">
                 <input class="btn btn-warning mx-2" type="reset" value="resetta campi">
@@ -44,4 +53,8 @@ Added_new_animal
     </form>
 </div>
 
+@endsection
+
+@section('custom-scripts')
+@vite('resources/js/alert_confirm.js')
 @endsection

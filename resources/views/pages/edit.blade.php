@@ -9,6 +9,16 @@ Edit_animal
     <form action="{{route('pages.store')}}" method="POST" >
         @csrf
         <div class="row justify-content-center">
+            @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
             <div class="mb-3 col-4 ">
                 <label for="nome">Nome</label>
                 <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm" placeholder="Nome animale" id="nome" name="nome"
@@ -52,4 +62,8 @@ Edit_animal
     </form>
 </div>
 
+@endsection
+
+@section('custom-scripts')
+    @vite('resources/js/alert_confirm.js')
 @endsection

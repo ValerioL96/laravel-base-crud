@@ -5,6 +5,16 @@
 @section('main-content')
 <section class="container">
     <div class="row my-5">
+        @if (session('message_delete'))
+        <div class="alert alert-success">
+            {{ session('message_delete') }}
+        </div>
+        @elseif (session('message_restore'))
+        <div class="alert alert-success">
+            {{ session('message_restore') }}
+        </div>
+        @endif
+        <article class="row d-flex justify-content-center">
         @foreach ($animals as $animal)
                 <article class="col-3 mb-3">
                     <div class="card text-bg-warning mb-3" style="max-width: 18rem;">
@@ -27,3 +37,7 @@
     </div>
 </section>
 @endsection
+
+@section('custom-scripts')
+    @vite('resources/js/delete_confirm.js')
+    @endsection

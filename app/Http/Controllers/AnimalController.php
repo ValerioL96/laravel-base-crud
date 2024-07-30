@@ -1,7 +1,8 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Requests\StoreAnimalRequest;
+use App\Http\Requests\UpdateAnimalRequest;
 use App\Models\Animal;
 use Illuminate\Http\Request;
 
@@ -48,7 +49,7 @@ class AnimalController extends Controller
 
         ;
 
-        return redirect()->route('pages.show', $newAnimal);
+        return redirect()->route('pages.show', $newAnimal)->with('message_nuovo_animale', $newAnimal->nome . " è stato Creato con successo!!");;
     }
 
     /**
@@ -70,9 +71,15 @@ class AnimalController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateAnimalRequest $request, Animal $animal)
     {
-        //
+        $data = $request->except('_token');
+        $data = $request->validated();
+
+
+        $animal->update($data);
+
+        return redirect()->route('pages.show', ['animal' => $animal->id])->with('message', $animal->nome . " è stato modificato con successo!!");
     }
 
     /**
@@ -80,6 +87,32 @@ class AnimalController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $animal->delete();
+        return redirect()->route('pages.index')->with('message_delete', $animal->nome . " è stato cancellato con successo!!");
+    }
+
+    /* pagina con gli animali nel cestino */
+    public function deletedIndex()
+    {
+        $animals = Animal::onlyTrashed()->get();
+
+        return view('pages.deleteindex', compact('animals'));
+    }
+
+    /* ripristinare elementi dal cestino */
+    public function restore(string $id)
+    {
+        $animal = Animal::onlyTrashed()->findOrFail($id);
+        $animal->restore();
+
+        return redirect()->route('pages.index')->with('message_restore', $animal->nome . " è stato ripristinato con successo!!");
+    }
+
+    /* cancellare definitivamente un'elemento */
+    public function delete(string $id)
+    {
+        $animal = Animal::onlyTrashed()->findOrFail($id);
+        $animal->forceDelete();
+        return redirect()->route('pages.deleted.index')->with('message_delete', $animal->nome . " è stato cancellato permanentemente con successo!!");
     }
 }

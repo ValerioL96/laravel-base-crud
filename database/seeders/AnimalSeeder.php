@@ -26,4 +26,26 @@ class AnimalSeeder extends Seeder
             $animal->save();
         }
     }
+
+    public function getCsv($filePath){
+        $csvDava = [];
+
+        $fileData = fopen($filePath, 'r');
+
+        //check file non trovato
+        if($fileData === false){
+            throw new InvalidArgumentException('File non trovato');
+        };
+
+        fgetcsv($fileData);
+
+        while(($csvRow = fgetcsv($fileData)) !== false){
+            $csvData[] = $csvRow;
+        };
+        fclose($fileData);
+        return $csvData;
+    }
+
 }
+
+
